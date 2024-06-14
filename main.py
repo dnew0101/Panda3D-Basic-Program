@@ -15,6 +15,17 @@ class MyApp(ShowBase):
             # Apply scale and position transforms on the model.
             self.scene.setScale(0.25, 0.25, 0.25)
             self.scene.setPos(-8, 42, 0)
+
+            #Add the spinCameraTask procedure to the task manager
+            self.tasskMgr.add(self.spinCameraTask, "SpinCameraTask")
+
+            #Load and transform the panda actor...
+            self.pandaActor = Actor("models/panda-model",
+                                    {"walk": "models/panda-walk4"})
+            self.pandaActor.setScale(0.005, 0.005, 0.005)
+            self.pandaActor.reparentTo(self.render)
+            #Loop animation.
+            self.pandaActor.loop("walk")
         
     #Define a procedure to move camera...
     def spinCameraTask(self, task):
